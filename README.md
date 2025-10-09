@@ -1,0 +1,2 @@
+# Quciksand
+Plain HTML frontend
