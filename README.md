@@ -1,2 +1,2 @@
-# Quciksand
+# Quicksand
 Plain HTML frontend
