@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+
+<head>
+  <check if="{{isset(@pgTitle)}}">
+    <true>
+      <title>{{@pgTitle}} | {{@QS.ATHEJA_BRAND}}</title>
+    </true>
+    <false>
+      <title>{{@QS.ATHEJA_BRAND}}</title>
+    </false>
+  </check>
+</head>
+
+<body>
+  <include href="{{@content}}" />
+</body>
