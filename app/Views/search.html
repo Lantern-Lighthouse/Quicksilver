@@ -1,0 +1,20 @@
+<div style="display: block ruby;">
+  <h1> {{@QS.ATHEJA_BRAND}} </h1>
+  <form action="search" method="get">
+    <input type="search" placeholder="{{@GET.q}}" name="q" />
+    <input type="submit" value="Search" />
+  </form>
+  Found {{@entries_count}} entries!
+</div>
+
+<repeat group="{{@entries}}" value="{{@entry}}">
+  <div>
+    <br>
+    <br>
+    <a href="{{@entry.url}}">
+      <h2>{{@entry.name}}</h2>
+    </a>
+    <summary>{{@entry.description}}</summary>
+    <sub>{{@entry.url}} | {{@entry.karma}} karma | {{@entry.author.displayname}} | {{@entry.created_at}}</sub>
+  </div>
+</repeat>
