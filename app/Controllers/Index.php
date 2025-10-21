@@ -18,5 +18,10 @@ class Index {
         $base->set("content", "search.html");
         echo \Template::instance()->render("index.html");
     }
+
+    public function getError(\Base $base): void {
+        $base->set("content", "error.html");
+        echo \Template::instance()->render("index.html");
+    }
 }
 
