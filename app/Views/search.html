@@ -4,13 +4,15 @@
     <input type="search" placeholder="{{@GET.q}}" name="q" />
     <input type="submit" value="Search" />
   </form>
-  Found {{@entries_count}} entries!
 </div>
 
+<center>
+  Found {{@entries_count}} entries!
+</center>
 <repeat group="{{@entries}}" value="{{@entry}}">
   <div>
     <br>
-    <br>
+    <hr>
     <a href="{{@entry.url}}">
       <h2>{{@entry.name}}</h2>
     </a>
