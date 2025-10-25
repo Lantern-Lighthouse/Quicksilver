@@ -1,3 +1,12 @@
+<check if="isset({{@SESSION.token}})">
+  <true>
+    <a href="/logni">Log out</a> or <a href="/enter">Add entry</a>
+  </true>
+  <false>
+    <a href="/login">Log in</a> or <a href="/register">Register</a>
+  </false>
+</check>
+
 <center>
   <br>
   <br>

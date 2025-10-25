@@ -1,0 +1,17 @@
+<check if="isset({{@SESSION.token}})">
+  <true>
+    <a href="/logni">Log out</a> or <a href="/enter">Add entry</a>
+  </true>
+  <false>
+    <a href="/login">Log in</a> or <a href="/register">Register</a>
+  </false>
+</check>
+
+<div style="display: block ruby;">
+  <h1><a href="/">{{@QS.ATHEJA_BRAND}}</a></h1>
+</div>
+
+<center>
+  <h2>Error</h2>
+  Try again later
+</center>
