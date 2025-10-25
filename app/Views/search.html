@@ -1,10 +1,18 @@
+<check if="isset({{@SESSION.token}})">
+  <true>
+    <a href="/logni">Log out</a> or <a href="/enter">Add entry</a>
+  </true>
+  <false>
+    <a href="/login">Log in</a> or <a href="/register">Register</a>
+  </false>
+</check>
+
 <div style="display: block ruby;">
   <h1><a href="/">{{@QS.ATHEJA_BRAND}}</a></h1>
   <form action="search" method="get">
     <input type="search" placeholder="{{@GET.q}}" name="q" />
     <input type="submit" value="Search" />
   </form>
-  <a href="/login">Log in</a> or <a href="/register">Register</a>
 </div>
 
 <center>

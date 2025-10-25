@@ -1,3 +1,12 @@
+<check if="isset({{@SESSION.token}})">
+  <true>
+    <a href="/logni">Log out</a> or <a href="/enter">Add entry</a>
+  </true>
+  <false>
+    <a href="/login">Log in</a> or <a href="/register">Register</a>
+  </false>
+</check>
+
 <center>
   <br>
   <br>
@@ -11,8 +20,4 @@
     <input type="search" placeholder="{{@QS.ATHEJA_BRAND_MOTTO}}" name="q" />
     <input type="submit" value="Search" />
   </form>
-  <br>
-  <br>
-  <br>
-  <a href="/login">Log in</a> or <a href="/register">Register</a>
 </center>
