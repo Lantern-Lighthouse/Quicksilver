@@ -78,4 +78,9 @@ class User {
         curl_close($ch);
         $base->reroute("/login");
     }
+
+    public function getLogout(\Base $base){
+        $base->clear("SESSION");
+        $base->reroute("/login");
+    }
 }
