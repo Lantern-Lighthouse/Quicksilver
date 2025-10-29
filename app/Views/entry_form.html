@@ -1,0 +1,27 @@
+<h1><a href="/">{{@QS.ATHEJA_BRAND}}</a></h1>
+
+<center>
+  <form method="post">
+    <label for="fetch-name-from-site">Fetch name from site:</label>
+    <input type="checkbox" name="fetch-name-from-site" id="fetch-name-from-site" checked /><br>
+
+    <label for="page-name">Page name:</label>
+    <input type="text" name="page-name" id="page-name" /><br>
+    <sub>Used as a backup option if fetching failed</sub><br>
+
+    <label for="page-desc">Page description:</label>
+    <textarea name="page-desc" id="page-desc"></textarea><br>
+
+    <label for="page-url">Page URL:</label>
+    <input type="url" name="page-url" id="page-url" /><br>
+
+    <label for="tags">Tags:</label>
+    <input type="text" name="tags" id="tags" /><br>
+    <sub>Use <code>;</code> to separate tags</sub><br>
+
+    <label for="is-nsfw">Is NSFW:</label>
+    <input type="checkbox" name="is-nsfw" id="is-nsfw" /><br>
+    <br>
+    <input type="submit" value="Post" />
+  </form>
+</center>
