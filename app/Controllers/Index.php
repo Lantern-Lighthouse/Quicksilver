@@ -10,6 +10,7 @@ class Index {
 
     public function getSearch(\Base $base): void {
         $query = $base->get("GET.q");
+        $query = str_replace(' ', '+', $query);
         $data = file_get_contents($base->get("QS.ATHEJA_SERVER_URL") . "/api/search?q=" . $query);
         $result = json_decode($data, true);
         $resultCount = $result["total_results"];
