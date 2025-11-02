@@ -110,4 +110,36 @@ class Post {
         curl_close($ch);
         $base->reroute("/");
     }
+
+    public function getDelete(\Base $base) {
+		if($base->get("SESSION.token") !== null) {
+			$postID = $base->get("PARAMS.entryID");
+
+	        $ch = curl_init();
+	        $options = [
+	            CURLOPT_URL => $base->get("QS.ATHEJA_SERVER_URL") . "/api/search/entry/" . $postID . "/delete",
+	            CURLOPT_RETURNTRANSFER => true,
+	            CURLOPT_POST => true,
+	            CURLOPT_HTTPHEADER => array("Authorization: Bearer " . $base->get("SESSION.token")),
+	        ];
+
+	        curl_setopt_array($ch, $options);
+
+	        $response = curl_exec($ch);
+	        $response = json_decode($response, true);
+	        $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+	        if((int)($statusCode / 100) !== 2) {
+	            $error = curl_error($ch);
+	            curl_close($ch);
+	            error_log($error);
+	            $base->reroute("/error");
+	        }
+
+	        curl_close($ch);
+	        $base->reroute("/");
+        } else {
+        	$base->reroute("/error");
+        }
+    }
 }
