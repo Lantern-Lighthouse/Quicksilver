@@ -26,6 +26,8 @@
       <h2>{{@entry.name}}</h2>
     </a>
     <summary>{{@entry.description}}</summary>
-    <sub>{{@entry.url}} | {{@entry.karma}} karma | {{@entry.author.displayname}} | {{@entry.created_at}}</sub>
+    <!-- TODO: voting and vote state display -->
+    <sub>{{@entry.url}} | <a>↑</a> {{@entry.karma}} karma <a>↓</a> | {{@entry.author.displayname}} |
+      {{@entry.created_at}} | <a href="/edit/entry/{{@entry.id}}">Edit</a></sub>
   </div>
 </repeat>
