@@ -24,6 +24,23 @@
       <h2>{{@entry.name}}</h2>
     </a>
     <summary>{{@entry.description}}</summary>
-    <sub>{{@entry.url}} | {{@entry.karma}} karma | {{@entry.author.displayname}} | {{@entry.created_at}}</sub>
+    <check if="isset({{@SESSION.token}})">
+      <true>
+        <sub>{{@entry.url}} | <a href="/rate/{{@entry.id}}/1">↑</a> {{@entry.karma}} karma (Your vote: <check
+            if="{{@entry.user_rating}} == 1">
+            <true>Upvote</true>
+            <false>
+              <check if="{{@entry.user_rating}} == -1">
+                <true>Downvote</true>
+                <false>No vote</false>
+              </check>
+            </false>
+          </check>) <a href="/rate/{{@entry.id}}/-1">↓</a> | {{@entry.author.displayname}} |
+          {{@entry.created_at}} | <a href="/edit/entry/{{@entry.id}}">Edit</a></sub>
+      </true>
+      <false>
+        <sub>{{@entry.url}} | {{@entry.karma}} karma | {{@entry.author.displayname}} | {{@entry.created_at}}</sub>
+      </false>
+    </check>
   </div>
 </repeat>

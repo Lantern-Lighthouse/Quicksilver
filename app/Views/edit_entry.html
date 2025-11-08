@@ -1,0 +1,16 @@
+<h1><a href="/">{{@QS.ATHEJA_BRAND}}</a></h1>
+
+<center>
+  <form method="post">
+    <label for="page-name">Page name:</label>
+    <input type="text" name="page-name" id="page-name" value="{{@entry.name}}" /><br>
+
+    <label for="page-desc">Page description:</label>
+    <textarea name="page-desc" id="page-desc">{{@entry.description}}</textarea><br>
+
+    <label for="page-url">Page URL:</label>
+    <cite id="page-url">{{@entry.url}}</cite><br>
+    <br>
+    <input type="submit" value="Edit" /> or <a href="/delete/entry/{{@entry.id}}">Delete</a>
+  </form>
+</center>
