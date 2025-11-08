@@ -34,7 +34,7 @@ class User {
         $response = json_decode($response, true);
         $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-        if($statusCode != 200) {
+        if((int)($statusCode / 100) === 2) {
             $error = curl_error($ch);
             curl_close($ch);
             $base->reroute("/error");
@@ -69,7 +69,7 @@ class User {
         $response = json_decode($response, true);
         $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-        if($statusCode != 201) {
+        if((int)($statusCode / 100) === 2) {
             $error = curl_error($ch);
             curl_close($ch);
             $base->reroute("/error");
