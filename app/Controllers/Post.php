@@ -142,4 +142,45 @@ class Post {
         	$base->reroute("/error");
         }
     }
+
+    public function getRate(\Base $base) {
+		if($base->get("SESSION.token") !== null) {
+			$entryID = $base->get("PARAMS.entryID");
+			$voteType = $base->get("PARAMS.type");
+
+	        $ch = curl_init();
+
+	        $postFields = [
+		        "vote_type" => $voteType,
+	        ];
+
+	        $options = [
+	            CURLOPT_URL => $base->get("QS.ATHEJA_SERVER_URL") . "/api/search/entry/" . $entryID . "/rate",
+	            CURLOPT_RETURNTRANSFER => true,
+	            CURLOPT_POST => true,
+	            CURLOPT_POSTFIELDS => http_build_query($postFields),
+	            CURLOPT_HTTPHEADER => array("Authorization: Bearer " . $base->get("SESSION.token")),
+	        ];
+
+	        curl_setopt_array($ch, $options);
+
+	        $response = curl_exec($ch);
+	        $response = json_decode($response, true);
+	        $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+	        if((int)($statusCode / 100) !== 2) {
+	            $error = curl_error($ch);
+	            curl_close($ch);
+	            error_log($error);
+	            $base->reroute("/error");
+	        }
+
+	        curl_close($ch);
+
+	        // Redirect back to previous page
+	        $referer = $base->get("HEADERS.Referer");
+	        if($referer) $base->reroute($referer);
+	        else $base->reroute("/");
+	    } else $base->reroute("/error");
+    }
 }
