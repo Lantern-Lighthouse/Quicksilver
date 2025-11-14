@@ -1,0 +1,18 @@
+<h1><a href="/">{{@QS.ATHEJA_BRAND}}</a></h1>
+
+<center>
+  <form method="post">
+    <label for="username">Username:</label>
+    <input type="text" name="username" id="username" value="{{@entry.username}}" /><br>
+    <input type="hidden" name="username-bef" value="{{@entry.username}}" />
+
+    <label for="displayname">Display name:</label>
+    <input type="text" name="displayname" id="displayname" value="{{@entry.displayname}}" /><br>
+
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" value="{{@entry.email}}" /><br>
+    <input type="hidden" name="email-bef" value="{{@entry.email}}" />
+    <br>
+    <input type="submit" value="Edit" /> or <a href="/delete/user/{{@entry.username}}">Delete</a>
+  </form>
+</center>
