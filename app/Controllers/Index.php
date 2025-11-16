@@ -9,11 +9,15 @@ class Index {
     }
 
     public function getSearch(\Base $base): void {
+        if(is_null($base->get("GET.q"))) {
+            $base->reroute("/error");
+        }
+
         $ch = curl_init();
 
         $postFields = [
             "query" => $base->get("GET.q"),
-            "category" => $base->get("GET.cat"),
+            "category" => $base->get("GET.cat") ?? array_key_first($base->get("search_categories")),
             "nsfw" => $base->get("GET.safe"),
             "min_karma" => $base->get("GET.threshold"),
         ];
@@ -41,7 +45,9 @@ class Index {
         curl_close($ch);
 
         $base->set("entries_count", $response["total_results"]);
+        $base->set("encoded_query", urlencode($base->get("GET.q")));
         $base->set("entries", $response["results"]);
+        $base->set("categories", array_keys($base->get("search_categories")));
         $base->set("content", "search.html");
         echo \Template::instance()->render("index.html");
     }
