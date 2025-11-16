@@ -9,11 +9,20 @@ class Index {
     }
 
     public function getSearch(\Base $base): void {
-        $query = $base->get("GET.q");
         $ch = curl_init();
+
+        $postFields = [
+            "query" => $base->get("GET.q"),
+            "category" => $base->get("GET.cat"),
+            "nsfw" => $base->get("GET.safe"),
+            "min_karma" => $base->get("GET.threshold"),
+        ];
+
         $options = [
-            CURLOPT_URL => $base->get("QS.ATHEJA_SERVER_URL") . "/api/search?q=" . $query,
+            CURLOPT_URL => $base->get("QS.ATHEJA_SERVER_URL") . "/api/search",
             CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => http_build_query($postFields),
             CURLOPT_HTTPHEADER => array("Authorization: Bearer " . $base->get("SESSION.token")),
         ];
         curl_setopt_array($ch, $options);
