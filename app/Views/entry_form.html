@@ -21,6 +21,13 @@
 
     <label for="is-nsfw">Is NSFW:</label>
     <input type="checkbox" name="is-nsfw" id="is-nsfw" /><br>
+
+    <label for="category">Category:</label>
+    <select name="category" id="category">
+      <repeat group="{{@categories}}" value="{{@category}}">
+        <option value="{{@category.id}}">{{@category.name}}</option>
+      </repeat>
+    </select><br>
     <br>
     <input type="submit" value="Post" />
   </form>
