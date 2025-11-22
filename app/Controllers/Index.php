@@ -52,8 +52,10 @@ class Index {
         switch(array_change_key_case($base->get("search_categories"), CASE_LOWER)[strtolower($postFields["category"])]["type"]){
             case "articles":
                 $base->set("content", "search.html");
+                break;
             case "gallery":
                 $base->set("content", "search_gallery.html");
+                break;
         }
         
         echo \Template::instance()->render("index.html");
