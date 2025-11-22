@@ -48,7 +48,14 @@ class Index {
         $base->set("encoded_query", urlencode($base->get("GET.q")));
         $base->set("entries", $response["results"]);
         $base->set("categories", array_keys($base->get("search_categories")));
-        $base->set("content", "search.html");
+
+        switch(array_change_key_case($base->get("search_categories"), CASE_LOWER)[strtolower($postFields["category"])]["type"]){
+            case "articles":
+                $base->set("content", "search.html");
+            case "gallery":
+                $base->set("content", "search_gallery.html");
+        }
+        
         echo \Template::instance()->render("index.html");
     }
 
