@@ -12,4 +12,11 @@ if($base->get("SESSION.token_expire") < date('Y-m-d H:i:s')) {
     $base->clear("SESSION");
 }
 
+if(is_null($base->get("search_categories"))){
+    $query = $base->get("GET.q");
+    $data = file_get_contents($base->get("QS.ATHEJA_SERVER_URL") . "/api/search/category");
+    $result = json_decode($data, true);
+    $base->set("search_categories", $result);
+}
+
 $base->run();

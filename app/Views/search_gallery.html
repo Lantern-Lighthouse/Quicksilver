@@ -1,0 +1,58 @@
+<check if="isset({{@SESSION.token}})">
+  <true>
+    <a href="/logni">Log out</a> or <a href="/enter">Add entry</a>
+  </true>
+  <false>
+    <a href="/login">Log in</a> or <a href="/register">Register</a>
+  </false>
+</check>
+
+<h1><a href="/">{{@QS.ATHEJA_BRAND}}</a></h1>
+<form action="search" method="get">
+  <input type="search" placeholder="{{@GET.q}}" name="q" />
+  <input type="submit" value="Search" />
+</form>
+<repeat group="{{@categories}}" value="{{@category}}">
+  <a href="/search?q={{@encoded_query}}&cat={{@category}}">{{@category}}</a>
+</repeat>
+
+<center>
+  Found {{@entries_count}} entries!
+</center>
+<repeat group="{{@entries}}" value="{{@entry}}">
+  <div>
+    <br>
+    <hr>
+    <table cellspacing="0" cellpadding="0">
+      <tr>
+        <td><img src="{{@entry.url}}" alt="{{@entry.name}}" width="240"></td>
+        <td width="20">&nbsp;</td>
+        <td>
+          <a href="{{@entry.url}}">
+            <h2>{{@entry.name}}</h2>
+          </a>
+          <summary>{{@entry.description}}</summary>
+          <check if="isset({{@SESSION.token}})">
+            <true>
+              <sub>{{@entry.url}} | <a href="/rate/{{@entry.id}}/1">↑</a> {{@entry.karma}} karma (Your vote: <check
+                  if="{{@entry.user_rating}} == 1">
+                  <true>Upvote</true>
+                  <false>
+                    <check if="{{@entry.user_rating}} == -1">
+                      <true>Downvote</true>
+                      <false>No vote</false>
+                    </check>
+                  </false>
+                </check>) <a href="/rate/{{@entry.id}}/-1">↓</a> | <a
+                  href="/user/{{@entry.author.username}}">{{@entry.author.displayname}}</a> |
+                {{@entry.created_at}} | <a href="/edit/entry/{{@entry.id}}">Edit</a></sub>
+            </true>
+            <false>
+              <sub>{{@entry.url}} | {{@entry.karma}} karma | {{@entry.author.displayname}} | {{@entry.created_at}}</sub>
+            </false>
+          </check>
+        </td>
+      </tr>
+    </table>
+  </div>
+</repeat>

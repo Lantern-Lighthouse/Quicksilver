@@ -12,6 +12,9 @@
   <input type="search" placeholder="{{@GET.q}}" name="q" />
   <input type="submit" value="Search" />
 </form>
+<repeat group="{{@categories}}" value="{{@category}}">
+  <a href="/search?q={{@encoded_query}}&cat={{@category}}">{{@category}}</a>
+</repeat>
 
 <center>
   Found {{@entries_count}} entries!

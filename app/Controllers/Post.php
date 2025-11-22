@@ -5,6 +5,7 @@ namespace Controllers;
 class Post {
 	public function getEnter(\Base $base) {
 		if($base->get("SESSION.token") !== null) {
+	        $base->set("categories", $this->ParseCategories($base->get("search_categories")));
 	        $base->set("content", "entry_form.html");
 	        echo \Template::instance()->render("index.html");
         } else {
@@ -24,6 +25,7 @@ class Post {
 	        "page-name" => $base->get("POST.page-name"),
 	        "page-desc" => $base->get("POST.page-desc"),
 	        "page-url" => $base->get("POST.page-url"),
+	        "view-category" => $base->get("POST.category"),
 	        "tags" => $base->get("POST.tags"),
 	        "is-nsfw" => $base->get("POST.is-nsfw"),
         ];
@@ -182,5 +184,23 @@ class Post {
 	        if($referer) $base->reroute($referer);
 	        else $base->reroute("/");
 	    } else $base->reroute("/error");
+    }
+
+    /**
+     * @param array<int,mixed> $input
+     * @return array<int,array<string,mixed>>
+     */
+    private function ParseCategories(array $input): array {
+    	$parsedItems = [];
+
+    	foreach ($input as $key => $value) {
+    		$parsedItems[] = [
+    			"name" => $key,
+    			"id" => $value["id"],
+    			"type" => $value["type"]
+    		];
+    	}
+
+    	return $parsedItems;
     }
 }
