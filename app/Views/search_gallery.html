@@ -9,7 +9,7 @@
 
 <h1><a href="/">{{@QS.ATHEJA_BRAND}}</a></h1>
 <form action="search" method="get">
-  <input type="search" placeholder="{{@GET.q}}" name="q" />
+  <input type="search" placeholder="{{@GET.q}}" name="q" required />
   <input type="submit" value="Search" />
 </form>
 <repeat group="{{@categories}}" value="{{@category}}">
