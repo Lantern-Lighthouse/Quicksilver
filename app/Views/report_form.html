@@ -1,0 +1,30 @@
+<h1><a href="/">{{@QS.ATHEJA_BRAND}}</a></h1>
+
+<center>
+  <form method="post">
+    <check if="{{isset(@user_reported_name)}}">
+      <label for="reported">Reported:</label>
+      <cite id="reported">{{@user_reported_name}}</cite>
+      <br>
+      <br>
+    </check>
+
+    <check if="{{isset(@entry_reported)}}">
+      <label for="reported">Reported:</label>
+      <cite id="reported">
+        <a href="{{@entry_reported.url}}">{{@entry_reported.name}}</a> by {{@entry_reported.author.displayname}}
+      </cite>
+      <br>
+      <br>
+    </check>
+
+    <label for="reason">Reason:</label>
+    <select name="reason" id="reason">
+      <repeat group="{{@reasons}}" value="{{@reason}}">
+        <option value="{{array_search(@reason, @reasons)}}">{{@reason}}</option>
+      </repeat>
+    </select><br>
+    <br>
+    <input type="submit" value="Report" />
+  </form>
+</center>
