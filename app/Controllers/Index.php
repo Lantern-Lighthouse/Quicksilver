@@ -149,4 +149,25 @@ class Index
         curl_close($ch);
         $base->reroute("/");
     }
+
+    public function getAssemblyOpenSearchDescription (\Base $base) {
+        //$root = (!empty($_SERVER['HTTPS']) ? "https" :"http" ) . "://" . $_SERVER['HTTP_HOST'];
+        $root = (!empty($_SERVER['HTTPS']) ? "https" :"http" ) . "://" . $base->get("HOST") . $base->get("BASE");
+        foreach ($base->get("search_categories") as $key => $value) {
+            $xmlFile = fopen("assets/osd-". $key. ".xml", "w") or die("Unable to open file!");
+            $xml = <<<EOF
+            <?xml version="1.0"?>
+            <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+            <ShortName>Lantern</ShortName>
+            <Description>A tool that lights the way</Description>
+            <OutputEncoding>UTF-8</OutputEncoding>
+            <InputEncoding>UTF-8</InputEncoding>
+            <Url type="text/html" template="$root/search?q={searchTerms}&amp;cat=$key"/>
+            </OpenSearchDescription>
+            EOF;
+            fwrite($xmlFile, $xml);
+            fclose($xmlFile);
+        }
+        $base->reroute("/");
+    }
 }
