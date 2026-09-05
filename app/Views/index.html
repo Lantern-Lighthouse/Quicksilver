@@ -9,6 +9,11 @@
       <title>{{@QS.ATHEJA_BRAND}}</title>
     </false>
   </check>
+  <repeat group="{{@search_categories}}" key="{{@key}}" value="{{@_}}">
+    <check if='{{file_exists("assets/osd-" . @key . ".xml")}}'>
+      <link rel="search" type="application/opensearchdescription+xml" title="{{@QS.ATHEJA_BRAND}} - {{@key}}" href="assets/osd-{{@key}}.xml" />
+    </check>
+  </repeat>
 </head>
 
 <body>
