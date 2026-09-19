@@ -48,8 +48,9 @@
                 {{@entry.created_at}} | <a href="/edit/entry/{{@entry.id}}">Edit</a></sub>
             </true>
             <false>
-              <sub>{{@entry.url}} | {{@entry.karma}} karma | <a href="/user/{{@entry.author.username}}"> |
-                  {{@entry.created_at}}</sub>
+              <sub>{{@entry.url}} | {{@entry.karma}} karma | <a
+                  href="/user/{{@entry.author.username}}">{{@entry.author.displayname}}</a> |
+                {{@entry.created_at}}</sub>
             </false>
           </check>
         </td>
